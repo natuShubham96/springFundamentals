@@ -1,5 +1,6 @@
 package com.shubham.spring.springDemo;
 
+import com.shubham.spring.springDemo.basic.BinarySearchImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -14,6 +15,14 @@ public class SpringDemoApplication {
 		ConfigurableApplicationContext applicationContext = SpringApplication.run(SpringDemoApplication.class, args);
 
 		BinarySearchImpl binarySearch = applicationContext.getBean(BinarySearchImpl.class);
+
+		BinarySearchImpl binarySearch1 = applicationContext.getBean(BinarySearchImpl.class); //refers to same instance as binarySearch
+
+		// These types of beans where same instance is referred to is called singleton bean
+
+		System.out.println("binary Search"+binarySearch);
+
+		System.out.println("binary serach 1"+binarySearch1);
 
 		int result = binarySearch.binarySearch(new int[] {12,4,3,2},2);
 		System.out.println("Result="+result);

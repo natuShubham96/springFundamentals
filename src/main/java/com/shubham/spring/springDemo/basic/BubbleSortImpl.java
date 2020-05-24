@@ -1,13 +1,13 @@
-package com.shubham.spring.springDemo;
+package com.shubham.spring.springDemo.basic;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-@Qualifier("quick")
-public class QuickSortImpl implements SortingAlgorithm{
+@Qualifier("bubble")
+public class BubbleSortImpl implements SortingAlgorithm {
     public int[] sort(int[] numbers) {
-        System.out.println("Quick Sort");
+        System.out.println("Bubble Sort");
         return numbers;
     }
 }
