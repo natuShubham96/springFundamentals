@@ -18,8 +18,6 @@ public class SpringDemoApplication {
 
 		BinarySearchImpl binarySearch1 = applicationContext.getBean(BinarySearchImpl.class); //refers to same instance as binarySearch
 
-		// These types of beans where same instance is referred to is called singleton bean
-
 		System.out.println("binary Search"+binarySearch);
 
 		System.out.println("binary serach 1"+binarySearch1);
