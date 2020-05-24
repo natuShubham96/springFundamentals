@@ -3,7 +3,6 @@ package com.shubham.spring.springDemo;
 import com.shubham.spring.springDemo.CDI.SomeCDIBusiness;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -21,14 +20,16 @@ public class SpringCDIApplication {
 
         //ConfigurableApplicationContext applicationContext = SpringApplication.run(SpringDemoApplication.class, args);
 
-        ConfigurableApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringDemoApplication.class);
+        try (
+                AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringDemoApplication.class);
+        ) {
 
 
-        SomeCDIBusiness business = applicationContext.getBean(SomeCDIBusiness.class);
+            SomeCDIBusiness business = applicationContext.getBean(SomeCDIBusiness.class);
 
 
-        logger.info("{}",business);
+            logger.info("{}", business);
 
+        }
     }
-
 }

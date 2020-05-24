@@ -3,7 +3,6 @@ package com.shubham.spring.springDemo;
 import com.shubham.spring.springDemo.scope.PersonDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -20,19 +19,20 @@ public class SpringScopeDemoApplication {
 
         //ConfigurableApplicationContext applicationContext = SpringApplication.run(SpringDemoApplication.class, args);
 
-        ConfigurableApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringDemoApplication.class);
+        try (
+                AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringDemoApplication.class);
+        ) {
+            PersonDAO persondao = applicationContext.getBean(PersonDAO.class);
 
-        PersonDAO persondao = applicationContext.getBean(PersonDAO.class);
+            PersonDAO persondao2 = applicationContext.getBean(PersonDAO.class);
 
-        PersonDAO persondao2 = applicationContext.getBean(PersonDAO.class);
+            logger.info("{}", persondao);
+            logger.info("{}", persondao.getJdbcConnection());
 
-        logger.info("{}",persondao);
-        logger.info("{}",persondao.getJdbcConnection());
-
-        logger.info("{}",persondao2);
-        logger.info("{}",persondao2.getJdbcConnection());
+            logger.info("{}", persondao2);
+            logger.info("{}", persondao2.getJdbcConnection());
 
 
+        }
     }
-
 }

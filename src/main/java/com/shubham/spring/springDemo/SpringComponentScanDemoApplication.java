@@ -3,7 +3,6 @@ package com.shubham.spring.springDemo;
 import com.shubham.spring.ComponentScan.ComponentDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -21,14 +20,15 @@ public class SpringComponentScanDemoApplication {
 
         //ConfigurableApplicationContext applicationContext = SpringApplication.run(SpringDemoApplication.class, args);
 
-        ConfigurableApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringDemoApplication.class);
+        try (
+                AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringDemoApplication.class);
+        ) {
+
+            ComponentDAO componentdao = applicationContext.getBean(ComponentDAO.class);
 
 
-        ComponentDAO componentdao = applicationContext.getBean(ComponentDAO.class);
+            logger.info("{}", componentdao);
 
-
-        logger.info("{}",componentdao);
-
+        }
     }
-
 }
